@@ -8,6 +8,7 @@ function documentNotFoundErrorHandler(queryFailSelector) {
 }
 
 const getUsersErrorHandlerSelector = 'users';
+const getCurrentUserErrorHandlerSelector = 'user';
 const getUserByIdErrorHandlerSelector = 'user with that Id';
 
 const getCardsErrorHandlerSelector = 'cards';
@@ -19,4 +20,5 @@ module.exports = {
   getUserByIdErrorHandlerSelector,
   getCardByIdErrorHandlerSelector,
   getCardsErrorHandlerSelector,
+  getCurrentUserErrorHandlerSelector,
 };

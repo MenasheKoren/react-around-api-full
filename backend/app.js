@@ -1,4 +1,4 @@
-require('dotenv').config({ debug: true });
+require('dotenv').config();
 
 const express = require('express');
 const mongoose = require('mongoose');
