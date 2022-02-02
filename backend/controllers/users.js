@@ -1,6 +1,6 @@
+require('dotenv').config();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-
 const User = require('../models/user');
 
 const {
@@ -73,8 +73,10 @@ module.exports.getCurrentUser = (req, res) => {
     .orFail(() => {
       documentNotFoundErrorHandler(getCurrentUserErrorHandlerSelector);
     })
-    .then(() => {
-      res.status(200).send({ name, about, avatar });
+    .then((user) => {
+      res
+        .status(200)
+        .send({ name: user.name, about: user.about, avatar: user.avatar });
     })
     .catch((err) => {
       catchFindErrorHandler(err, res);
@@ -137,16 +139,16 @@ module.exports.login = (req, res) => {
   return User.findUserByCredentials(email, password)
     .then((user) => {
       const { NODE_ENV, JWT_SECRET } = process.env;
-
       const token = jwt.sign(
         { _id: user._id },
         NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret',
-        { expiresIn: '7d' }
-      );
+        { expiresIn: '7d' },
+      )
 
       res.send({ token });
     })
     .catch((err) => {
-      res.status(401).send({ message: err.message });
+      console.log(err);
+      res.status(401).send({ message: err.message })
     });
 };

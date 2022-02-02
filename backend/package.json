@@ -1,7 +1,7 @@
 {
   "author": "Menashe Koren",
   "bugs": {
-    "url": "https://github.com/MenasheKoren/around-express/issues"
+    "url": "https://github.com/MenasheKoren/react-around-api-full/issues"
   },
   "dependencies": {
     "@types/jest": "^27.4.0",
@@ -25,17 +25,17 @@
     "nodemon": "^2.0.15",
     "prettier": "^2.5.1"
   },
-  "homepage": "https://github.com/MenasheKoren/around-express#readme",
+  "homepage": "https://github.com/MenasheKoren/react-around-api-full#readme",
   "license": "ISC",
-  "main": "index.js",
-  "name": "web_project_12",
+  "main": "app.js",
+  "name": "web_project_15",
   "prettier": {
     "singleQuote": true,
     "bracketSpacing": true
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/MenasheKoren/around-express.git"
+    "url": "git+https://github.com/MenasheKoren/react-around-api-full.git"
   },
   "scripts": {
     "dev": "nodemon server.js",
