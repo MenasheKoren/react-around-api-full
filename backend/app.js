@@ -11,7 +11,6 @@ const { createUser, login } = require('./controllers/users');
 const auth = require('./middleware/auth');
 const { createCard } = require('./controllers/cards');
 
-// const { PORT = 3000 } = process.env;
 const app = express();
 
 mongoose.connect('mongodb://localhost:27017/aroundb');

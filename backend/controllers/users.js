@@ -47,28 +47,25 @@ module.exports.getUserById = (req, res) => {
 };
 
 module.exports.createUser = (req, res) => {
-  const { name, about, avatar, email, password } = req.body;
-  bcrypt.hash(password, 10).then((hash) =>
-    User.create({
-      name,
-      about,
-      avatar,
-      email,
-      password: hash,
-    })
+  const {
+    name, about, avatar, email, password,
+  } = req.body;
+  bcrypt.hash(password, 10).then((hash) => User.create({
+    name,
+    about,
+    avatar,
+    email,
+    password: hash,
+  })
 
-      .then((user) =>
-        res.status(200).send({ _id: user._id, email: user.email })
-      )
-      .catch((err) => {
-        catchCreateErrorHandler(err, res, userDataErrorHandlerSelector);
-      })
-  );
+    .then((user) => res.status(200).send({ _id: user._id, email: user.email }))
+    .catch((err) => {
+      catchCreateErrorHandler(err, res, userDataErrorHandlerSelector);
+    }));
 };
 
 module.exports.getCurrentUser = (req, res) => {
-  const { name, about, avatar, email, password } = req.body;
-  return User.findUserByCredentials(email, password)
+  User.findById(req.user._id)
     .lean()
     .orFail(() => {
       documentNotFoundErrorHandler(getCurrentUserErrorHandlerSelector);
@@ -76,7 +73,7 @@ module.exports.getCurrentUser = (req, res) => {
     .then((user) => {
       res
         .status(200)
-        .send({ name: user.name, about: user.about, avatar: user.avatar });
+        .send({ data: user });
     })
     .catch((err) => {
       catchFindErrorHandler(err, res);
@@ -92,7 +89,7 @@ module.exports.updateUserProfile = (req, res) => {
       new: true,
       runValidators: true,
       upsert: false,
-    }
+    },
   )
     .orFail(() => {
       documentNotFoundErrorHandler(getUserByIdErrorHandlerSelector);
@@ -103,7 +100,7 @@ module.exports.updateUserProfile = (req, res) => {
         err,
         res,
         userProfileDataErrorHandlerSelector,
-        updateActionFailSelector
+        updateActionFailSelector,
       );
     });
 };
@@ -117,7 +114,7 @@ module.exports.updateUserAvatar = (req, res) => {
       new: true,
       runValidators: true,
       upsert: false,
-    }
+    },
   )
     .orFail(() => {
       documentNotFoundErrorHandler(getUserByIdErrorHandlerSelector);
@@ -128,7 +125,7 @@ module.exports.updateUserAvatar = (req, res) => {
         err,
         res,
         userAvatarDataErrorHandlerSelector,
-        updateActionFailSelector
+        updateActionFailSelector,
       );
     });
 };
@@ -143,12 +140,11 @@ module.exports.login = (req, res) => {
         { _id: user._id },
         NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret',
         { expiresIn: '7d' },
-      )
+      );
 
       res.send({ token });
     })
     .catch((err) => {
-      console.log(err);
-      res.status(401).send({ message: err.message })
+      res.status(401).send({ message: err.message });
     });
 };
