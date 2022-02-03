@@ -16,6 +16,8 @@ const {
   celebrateLogin,
 } = require('./middleware/celebrate');
 
+const { requestLogger, errorLogger } = require('./middleware/logger');
+
 const app = express();
 
 mongoose.connect('mongodb://localhost:27017/aroundb');
@@ -27,6 +29,7 @@ app.get('/', (req, res) => {
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(helmet());
+app.use(requestLogger);
 
 app.post('/signin', celebrateLogin, login);
 app.post('/signup', celebrateCreateUser, createUser);
@@ -35,7 +38,7 @@ app.use('/users', auth, users);
 app.use('/cards', auth, cards);
 
 app.post('/cards', auth, createCard);
-
+app.use(errorLogger);
 app.use((req, res) => {
   res.status(404).send({ message: 'Requested resource not found' });
 });
