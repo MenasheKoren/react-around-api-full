@@ -34,8 +34,13 @@ app.post('/cards', auth, createCard);
 app.use((req, res) => {
   res.status(404).send({ message: 'Requested resource not found' });
 });
-app.use((err, req, res) => {
-  res.status(500).send({ message: 'An error has occurred on the server' });
+app.use((err, req, res, next) => {
+  // if an error has no status, give it status 500
+  const { statusCode = 500, message } = err;
+  res.status(statusCode).send({
+    // check the status and display a message based on it
+    message: statusCode === 500 ? 'An error occurred on the server' : message,
+  });
 });
 
 module.exports = app;
