@@ -7,14 +7,12 @@ const app = require('./app');
 const request = supertest(app);
 const MONGO_URL = 'mongodb://localhost:27017/aroundb';
 
-beforeAll(() =>
-  mongoose.connect(MONGO_URL, {
-    useNewUrlParser: true,
-    useCreateIndex: true,
-    useFindAndModify: false,
-    useUnifiedTopology: true,
-  })
-);
+beforeAll(() => mongoose.connect(MONGO_URL, {
+  useNewUrlParser: true,
+  useCreateIndex: true,
+  useFindAndModify: false,
+  useUnifiedTopology: true,
+}));
 
 afterAll(() => mongoose.disconnect());
 
@@ -30,9 +28,8 @@ describe('Database tests', () => {
 
   afterEach(() => User.deleteOne({ email: fixtures.user.email }));
 
-  it('The user must be complete', () =>
-    User.findOne({ email: fixtures.user.email }).then((user) => {
-      expect(user).toBeDefined();
-      expect(user.email).toBe(fixtures.user.email);
-    }));
+  it('The user must be complete', () => User.findOne({ email: fixtures.user.email }).then((user) => {
+    expect(user).toBeDefined();
+    expect(user.email).toBe(fixtures.user.email);
+  }));
 });

@@ -10,7 +10,9 @@
     "web-vitals": "^1.1.2"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "startFrontend": "react-scripts start",
+    "lintFrontend": "npx eslint .",
+    "lintFrontend:fix": "npx eslint . --fix",
     "build": "react-scripts build",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",

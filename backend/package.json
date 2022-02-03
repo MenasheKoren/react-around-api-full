@@ -39,9 +39,9 @@
   },
   "scripts": {
     "dev": "nodemon server.js",
-    "lint": "npx eslint .",
-    "lint:fix": "npx eslint . --fix",
-    "start": "node server.js",
+    "lintBackend": "npx eslint .",
+    "lintBackend:fix": "npx eslint . --fix",
+    "startBackend": "node server.js",
     "test": "jest"
   },
   "version": "1.0.0"
