@@ -7,7 +7,7 @@ import reportWebVitals from './reportWebVitals';
 
 render(
   <React.StrictMode>
-    <BrowserRouter basename="/react-around-api-full">
+    <BrowserRouter basename="/menashekoren.students.nomoreparties.sbs">
       <App />
     </BrowserRouter>
   </React.StrictMode>,
