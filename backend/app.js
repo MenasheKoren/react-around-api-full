@@ -22,7 +22,7 @@ const app = express();
 
 mongoose.connect('mongodb://localhost:27017/aroundb');
 
-app.get('/', (req, res) => {
+app.get('/test', (req, res) => {
   res.status(200).send('Hello, world!');
 });
 
