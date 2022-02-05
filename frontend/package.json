@@ -15,8 +15,7 @@
     "lintFrontend:fix": "npx eslint . --fix",
     "build": "react-scripts build",
     "eject": "react-scripts eject",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "npm run build && scp -r ./build/* menashekoren@menashekoren.students.nomoreparties.sbs:/home/menashekoren/react-around-api-full/frontend"
   },
   "eslintConfig": {
     "extends": [
@@ -49,5 +48,5 @@
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3"
   },
-  "homepage": "https://menashekoren.github.io/react-around-api-full"
+  "homepage": "https://menashekoren.students.nomoreparties.sbs"
 }
