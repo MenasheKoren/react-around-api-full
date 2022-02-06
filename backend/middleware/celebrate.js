@@ -44,7 +44,6 @@ module.exports.celebrateCreateCard = celebrate({
     .keys({
       name: Joi.string().required().min(2).max(30),
       link: Joi.string().required().custom(validateURL),
-      owner: Joi.string().required(),
     })
     .unknown(true),
 });
