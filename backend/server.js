@@ -3,7 +3,7 @@ require('dotenv').config();
 const { PORT = 3000 } = process.env;
 const app = require('./app');
 
-if (process.env.NODE_ENV !== 'test') {
+if (process.env.NODE_ENV !== 'production') {
   app.listen(PORT, (err, res) => {
     if (err) {
       res.status(500).send({ message: 'An error has occurred on the server' });
