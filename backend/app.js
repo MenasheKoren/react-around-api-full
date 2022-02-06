@@ -25,7 +25,7 @@ mongoose.connect('mongodb://localhost:27017/aroundb');
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(helmet());
-app.use(requestLogger());
+app.use(requestLogger);
 
 app.get('/test', (req, res) => {
   res.status(200).send('Hello, world!');
@@ -51,5 +51,6 @@ app.use((err, req, res, next) => {
     message: statusCode === 500 ? 'An error occurred on the server' : message,
   });
 });
+// app.use(requestLogger);
 
 module.exports = app;
