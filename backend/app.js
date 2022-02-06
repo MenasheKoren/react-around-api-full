@@ -3,7 +3,7 @@ require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const helmet = require('helmet');
-
+const cors = require('cors');
 const { errors } = require('celebrate');
 const users = require('./routes/users');
 
@@ -21,7 +21,8 @@ const { requestLogger, errorLogger } = require('./middleware/logger');
 const app = express();
 
 mongoose.connect('mongodb://localhost:27017/aroundb');
-
+app.use(cors());
+app.options('*', cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(helmet());
