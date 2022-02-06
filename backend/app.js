@@ -22,14 +22,14 @@ const app = express();
 
 mongoose.connect('mongodb://localhost:27017/aroundb');
 
-app.get('/test', (req, res) => {
-  res.status(200).send('Hello, world!');
-});
-
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(helmet());
-app.use(requestLogger);
+app.use(requestLogger());
+
+app.get('/test', (req, res) => {
+  res.status(200).send('Hello, world!');
+});
 
 app.post('/signin', celebrateLogin, login);
 app.post('/signup', celebrateCreateUser, createUser);
