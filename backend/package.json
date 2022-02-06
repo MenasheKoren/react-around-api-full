@@ -29,7 +29,7 @@
     "nodemon": "^2.0.15",
     "prettier": "^2.5.1"
   },
-  "homepage": "https://github.com/MenasheKoren/react-around-api-full#readme",
+  "homepage": "https://menashekoren.students.nomoreparties.sbs",
   "license": "ISC",
   "main": "app.js",
   "name": "web_project_15",
