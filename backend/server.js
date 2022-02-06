@@ -1,8 +1,11 @@
 require('dotenv').config();
 
 const { PORT = 3000 } = process.env;
+const cors = require('cors');
 const app = require('./app');
 
+app.use(cors());
+app.options('*', cors());
 if (process.env.NODE_ENV !== 'production') {
   app.listen(PORT, (err, res) => {
     if (err) {

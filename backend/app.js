@@ -1,7 +1,6 @@
 require('dotenv').config();
 
 const express = require('express');
-const cors = require('cors');
 
 const mongoose = require('mongoose');
 const helmet = require('helmet');
@@ -27,8 +26,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(helmet());
 app.use(requestLogger);
-app.use(cors());
-app.options('*', cors());
+
 app.get('/crash-test', () => {
   setTimeout(() => {
     throw new Error('Server will crash now');
