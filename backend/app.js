@@ -5,6 +5,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const helmet = require('helmet');
 const { errors } = require('celebrate');
+const cors = require('cors');
 const users = require('./routes/users');
 
 const cards = require('./routes/cards');
@@ -19,6 +20,7 @@ const {
 const { requestLogger, errorLogger } = require('./middleware/logger');
 
 const app = express();
+const { PORT = 3000 } = process.env;
 
 mongoose.connect('mongodb://localhost:27017/aroundb');
 
@@ -27,10 +29,13 @@ app.use(express.json());
 app.use(helmet());
 app.use(requestLogger);
 
+app.use(cors());
+app.options('*', cors());
+
 app.get('/crash-test', () => {
   setTimeout(() => {
     throw new Error('Server will crash now');
-  }, 0);
+  }, 10);
 });
 
 app.get('/test', (req, res) => {
@@ -57,6 +62,15 @@ app.use((err, req, res, next) => {
     message: statusCode === 500 ? 'An error occurred on the server' : message,
   });
 });
-// app.use(requestLogger);
+
+if (process.env.NODE_ENV !== 'production') {
+  app.listen(PORT, (err, res) => {
+    if (err) {
+      res.status(500).send({ message: 'An error has occurred on the server' });
+    }
+    // eslint-disable-next-line no-console
+    console.log(`App listening on port ${PORT}`);
+  });
+}
 
 module.exports = app;

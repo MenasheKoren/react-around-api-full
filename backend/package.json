@@ -43,10 +43,10 @@
     "url": "git+https://github.com/MenasheKoren/react-around-api-full.git"
   },
   "scripts": {
-    "dev": "nodemon server.js",
+    "dev": "nodemon app.js",
     "lintBackend": "npx eslint .",
     "lintBackend:fix": "npx eslint . --fix",
-    "startBackend": "node server.js",
+    "startBackend": "node app.js",
     "test": "jest"
   },
   "version": "1.0.0"
