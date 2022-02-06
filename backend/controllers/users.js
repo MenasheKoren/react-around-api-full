@@ -40,7 +40,7 @@ module.exports.getUserById = (req, res) => {
   User.findById(req.params.userId)
     .lean()
     .orFail(() => documentNotFoundErrorHandler(getUserByIdErrorHandlerSelector))
-    .then((user) => res.status(200).send({ data: user }))
+    .then((user) => res.status(200).send({ user }))
     .catch((err) => {
       catchFindByIdErrorHandler(err, res);
     });
@@ -94,7 +94,7 @@ module.exports.updateUserProfile = (req, res) => {
     .orFail(() => {
       documentNotFoundErrorHandler(getUserByIdErrorHandlerSelector);
     })
-    .then((user) => res.status(200).send({ data: user }))
+    .then((user) => res.status(200).send({ user }))
     .catch((err) => {
       catchFindByIdAndUpdateOrDeleteErrorHandler(
         err,
@@ -119,7 +119,7 @@ module.exports.updateUserAvatar = (req, res) => {
     .orFail(() => {
       documentNotFoundErrorHandler(getUserByIdErrorHandlerSelector);
     })
-    .then((user) => res.status(200).send({ data: user }))
+    .then((user) => res.status(200).send({ user }))
     .catch((err) => {
       catchFindByIdAndUpdateOrDeleteErrorHandler(
         err,

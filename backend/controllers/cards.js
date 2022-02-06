@@ -34,7 +34,7 @@ module.exports.getCards = (req, res) => {
 module.exports.createCard = (req, res) => {
   const { name, link } = req.body;
   Card.create({ name, link, owner: req.user._id })
-    .then((card) => res.status(200).send({ data: card }))
+    .then((card) => res.status(200).send({ card }))
     .catch((err) => {
       catchCreateErrorHandler(err, res, cardDataErrorHandlerSelector);
     });
@@ -45,7 +45,7 @@ module.exports.deleteCardById = (req, res) => {
     .orFail(() => {
       documentNotFoundErrorHandler(getCardByIdErrorHandlerSelector);
     })
-    .then((card) => res.status(200).send({ data: card }))
+    .then((card) => res.status(200).send({ card }))
     .catch((err) => {
       catchFindByIdAndUpdateOrDeleteErrorHandler(
         err,
@@ -64,7 +64,7 @@ module.exports.likeCard = (req, res) => Card.findByIdAndUpdate(
   .orFail(() => {
     documentNotFoundErrorHandler(getCardByIdErrorHandlerSelector);
   })
-  .then((card) => res.status(200).send({ data: card }))
+  .then((card) => res.status(200).send({ card }))
   .catch((err) => {
     catchFindByIdAndUpdateOrDeleteErrorHandler(
       err,
@@ -82,7 +82,7 @@ module.exports.dislikeCard = (req, res) => Card.findByIdAndUpdate(
   .orFail(() => {
     documentNotFoundErrorHandler(getCardByIdErrorHandlerSelector);
   })
-  .then((card) => res.status(200).send({ data: card }))
+  .then((card) => res.status(200).send({ card }))
   .catch((err) => {
     catchFindByIdAndUpdateOrDeleteErrorHandler(
       err,
