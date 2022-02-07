@@ -93,8 +93,7 @@ module.exports.updateUserProfile = (req, res) => {
       documentNotFoundErrorHandler(getUserByIdErrorHandlerSelector);
     })
     .then((user) => {
-      console.log(user);
-      res.status(200).send({ user });
+      res.status(200).send({ name: user.name, about: user.about });
     })
     .catch((err) => {
       catchFindByIdAndUpdateOrDeleteErrorHandler(
@@ -121,8 +120,7 @@ module.exports.updateUserAvatar = (req, res) => {
       documentNotFoundErrorHandler(getUserByIdErrorHandlerSelector);
     })
     .then((user) => {
-      console.log(user);
-      res.status(200).send({ user });
+      res.status(200).send({ avatar: user.avatar });
     })
     .catch((err) => {
       catchFindByIdAndUpdateOrDeleteErrorHandler(
