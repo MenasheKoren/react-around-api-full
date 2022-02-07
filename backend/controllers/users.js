@@ -120,7 +120,10 @@ module.exports.updateUserAvatar = (req, res) => {
     .orFail(() => {
       documentNotFoundErrorHandler(getUserByIdErrorHandlerSelector);
     })
-    .then((user) => res.status(200).send({ user }))
+    .then((user) => {
+      console.log(user);
+      res.status(200).send({ user });
+    })
     .catch((err) => {
       catchFindByIdAndUpdateOrDeleteErrorHandler(
         err,
