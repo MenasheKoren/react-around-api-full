@@ -8,7 +8,12 @@ const cors = require('cors');
 const users = require('./routes/users');
 
 const cards = require('./routes/cards');
-const { createUser, login } = require('./controllers/users');
+const {
+  createUser,
+  login,
+  updateUserProfile,
+  updateUserAvatar,
+} = require('./controllers/users');
 const auth = require('./middleware/auth');
 const { createCard } = require('./controllers/cards');
 const {
@@ -37,14 +42,12 @@ app.get('/crash-test', () => {
   }, 10);
 });
 
-app.get('/test', (req, res) => {
-  res.status(200).send('Hello, world!');
-});
-
 app.post('/signin', celebrateLogin, login);
 app.post('/signup', celebrateCreateUser, createUser);
 
 app.use('/users', auth, users);
+app.patch('/me', auth, updateUserProfile);
+app.patch('/me/avatar', auth, updateUserAvatar);
 app.use('/cards', auth, cards);
 
 app.post('/cards', auth, createCard);
