@@ -32,7 +32,7 @@
   },
   "homepage": "https://menashekoren.students.nomoreparties.sbs",
   "license": "ISC",
-  "main": "app.js",
+  "main": "backend/app.js",
   "name": "web_project_15",
   "prettier": {
     "singleQuote": true,
@@ -43,11 +43,11 @@
     "url": "git+https://github.com/MenasheKoren/react-around-api-full.git"
   },
   "scripts": {
-    "dev": "nodemon app.js",
-    "lintBackend": "npx eslint .",
-    "lintBackend:fix": "npx eslint . --fix",
-    "startBackend": "node app.js",
-    "test": "jest"
+    "dev": "backend/node_modules/.bin/nodemon app.js",
+    "lintBackend": "npx eslint backend",
+    "lintBackend:fix": "npx eslint backend --fix",
+    "startBackend": "node backend/app.js",
+    "test": "backend/node_modules/.bin/jest"
   },
   "version": "1.0.0"
 }
