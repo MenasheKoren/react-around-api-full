@@ -8,14 +8,19 @@ const cors = require('cors');
 const users = require('./routes/users');
 
 const cards = require('./routes/cards');
+
 const {
   createUser,
   login,
-  updateUserProfile,
-  updateUserAvatar,
 } = require('./controllers/users');
-const auth = require('./middleware/auth');
-const { createCard } = require('./controllers/cards');
+// const auth = require('./middleware/auth');
+// const {
+//   createCard,
+//   deleteCardById,
+//   likeCard,
+//   dislikeCard,
+//   getCards,
+// } = require('./controllers/cards');
 const {
   celebrateCreateUser,
   celebrateLogin,
@@ -45,12 +50,20 @@ app.get('/crash-test', () => {
 app.post('/signin', celebrateLogin, login);
 app.post('/signup', celebrateCreateUser, createUser);
 
-app.use('/users', auth, users);
-app.patch('/me', auth, updateUserProfile);
-app.patch('/me/avatar', auth, updateUserAvatar);
-app.use('/cards', auth, cards);
+app.use('/users', users);
+// app.get('/users', auth, getUsers);
+// app.get('/me', auth, getCurrentUser);
+// app.patch('/me', auth, updateUserProfile);
+// app.patch('/me/avatar', auth, updateUserAvatar);
+// app.get('/:userId', auth, getUserById);
 
-app.post('/cards', auth, createCard);
+app.use('/cards/api', cards);
+// app.get('/', auth, getCards);
+// app.post('/', auth, createCard);
+// app.delete('/:cardId', auth, deleteCardById);
+// app.put('/:cardId/likes', auth, likeCard);
+// app.delete('/:cardId/likes', auth, dislikeCard);
+
 app.use(errorLogger);
 app.use((req, res) => {
   res.status(404).send({ message: 'Requested resource not found' });

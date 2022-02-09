@@ -1,4 +1,6 @@
 const router = require('express').Router();
+const auth = require('../middleware/auth');
+
 const {
   getUsers,
   getUserById,
@@ -11,10 +13,10 @@ const {
   celebrateUpdateUserAvatar,
 } = require('../middleware/celebrate');
 
-router.get('/', getUsers);
-router.get('/me', getCurrentUser);
-router.patch('/me', celebrateUpdateUserProfile, updateUserProfile);
-router.patch('/me/avatar', celebrateUpdateUserAvatar, updateUserAvatar);
-router.get('/:userId', getUserById);
+router.get('/', auth, getUsers);
+router.get('/me', auth, getCurrentUser);
+router.patch('/me', celebrateUpdateUserProfile, auth, updateUserProfile);
+router.patch('/me/avatar', celebrateUpdateUserAvatar, auth, updateUserAvatar);
+router.get('/:userId', auth, getUserById);
 
 module.exports = router;
