@@ -14,7 +14,7 @@ describe('Endpoints respond to requests', () => {
     expect(response.headers['content-type']).toMatch('application/json');
   }));
 
-  it('POST "/signin" should return token in JSON format with correct status', () => request.post('/sigin').then((response) => {
+  it('POST "/signin" should return token in JSON format with correct status', () => request.post('/signin').then((response) => {
     expect(response.status).toBe(200);
     expect(response.headers['content-type']).toMatch('application/json');
     expect(response.body.key).toBe('token');
