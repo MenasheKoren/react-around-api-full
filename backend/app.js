@@ -9,18 +9,8 @@ const users = require('./routes/users');
 
 const cards = require('./routes/cards');
 
-const {
-  createUser,
-  login,
-} = require('./controllers/users');
-// const auth = require('./middleware/auth');
-// const {
-//   createCard,
-//   deleteCardById,
-//   likeCard,
-//   dislikeCard,
-//   getCards,
-// } = require('./controllers/cards');
+const { createUser, login } = require('./controllers/users');
+
 const {
   celebrateCreateUser,
   celebrateLogin,
@@ -51,32 +41,14 @@ app.post('/signin', celebrateLogin, login);
 app.post('/signup', celebrateCreateUser, createUser);
 
 app.use('/users', users);
-// app.get('/users', auth, getUsers);
-// app.get('/me', auth, getCurrentUser);
-// app.patch('/me', auth, updateUserProfile);
-// app.patch('/me/avatar', auth, updateUserAvatar);
-// app.get('/:userId', auth, getUserById);
 
 app.use('/cards/api', cards);
-// app.get('/', auth, getCards);
-// app.post('/', auth, createCard);
-// app.delete('/:cardId', auth, deleteCardById);
-// app.put('/:cardId/likes', auth, likeCard);
-// app.delete('/:cardId/likes', auth, dislikeCard);
 
 app.use(errorLogger);
+
 app.use((req, res) => {
   res.status(404).send({ message: 'Requested resource not found' });
 });
-
-// app.use(errors());
-
-// app.use((err, req, res, next) => {
-//   const { statusCode = 500, message } = err;
-//   res.status(statusCode).send({
-//     message: statusCode === 500 ? 'An error occurred on the server' : message,
-//   });
-// });
 
 if (process.env.NODE_ENV !== 'production') {
   app.listen(PORT, (err, res) => {
