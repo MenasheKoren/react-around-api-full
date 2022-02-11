@@ -41,7 +41,8 @@ module.exports.createCard = (req, res) => {
 };
 
 module.exports.deleteCardById = (req, res) => {
-  Card.findByIdAndDelete(req.params.cardId).populate('owner')
+  Card.findByIdAndDelete(req.params.cardId)
+    .populate('owner')
     .orFail(() => {
       documentNotFoundErrorHandler(getCardByIdErrorHandlerSelector);
     })
