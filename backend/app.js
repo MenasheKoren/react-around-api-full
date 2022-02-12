@@ -2,9 +2,9 @@ require('dotenv').config();
 
 const express = require('express');
 
+const cors = require('cors');
 const mongoose = require('mongoose');
 const helmet = require('helmet');
-const cors = require('cors');
 const users = require('./routes/users');
 
 const cards = require('./routes/cards');
