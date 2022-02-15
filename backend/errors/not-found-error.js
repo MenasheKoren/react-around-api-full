@@ -14,6 +14,8 @@ const getUserByIdErrorHandlerSelector = 'user with that Id';
 const getCardsErrorHandlerSelector = 'cards';
 const getCardByIdErrorHandlerSelector = 'card with that Id';
 
+const unknownRouteSelector = 'URL';
+
 module.exports = {
   documentNotFoundErrorHandler,
   getUsersErrorHandlerSelector,
@@ -21,4 +23,5 @@ module.exports = {
   getCardByIdErrorHandlerSelector,
   getCardsErrorHandlerSelector,
   getCurrentUserErrorHandlerSelector,
+  unknownRouteSelector,
 };

@@ -52,7 +52,7 @@ module.exports.celebrateCreateCard = celebrate({
 module.exports.celebrateDeleteCardById = celebrate({
   params: Joi.object()
     .keys({
-      cardId: Joi.string().alphanum().length(24),
+      cardId: Joi.string().hex().length(24),
     })
     .unknown(true),
 });
@@ -60,7 +60,7 @@ module.exports.celebrateDeleteCardById = celebrate({
 module.exports.celebrateLikeCard = celebrate({
   params: Joi.object()
     .keys({
-      cardId: Joi.string().alphanum().length(24),
+      cardId: Joi.string().hex().length(24),
     })
     .unknown(true),
 });
@@ -68,7 +68,7 @@ module.exports.celebrateLikeCard = celebrate({
 module.exports.celebrateDislikeCard = celebrate({
   params: Joi.object()
     .keys({
-      cardId: Joi.string().alphanum().length(24),
+      cardId: Joi.string().hex().length(24),
     })
     .unknown(true),
 });

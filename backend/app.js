@@ -50,14 +50,12 @@ app.use((req, res) => {
   res.status(404).send({ message: 'Requested resource not found' });
 });
 
-if (process.env.NODE_ENV !== 'production') {
-  app.listen(PORT, (err, res) => {
-    if (err) {
-      res.status(500).send({ message: 'An error has occurred on the server' });
-    }
-    // eslint-disable-next-line no-console
-    console.log(`App listening on port ${PORT}`);
-  });
-}
+app.listen(PORT, (err, res) => {
+  if (err) {
+    res.status(500).send({ message: 'An error has occurred on the server' });
+  }
+  // eslint-disable-next-line no-console
+  console.log(`App listening on port ${PORT}`);
+});
 
 module.exports = app;
