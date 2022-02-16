@@ -1,11 +1,12 @@
 require('dotenv').config();
 const jwt = require('jsonwebtoken');
+const { noAuthErrorHandler } = require('../errors/no-auth-error');
 
 module.exports = (req, res, next) => {
   const { authorization } = req.headers;
 
   if (!authorization || !authorization.startsWith('Bearer ')) {
-    return res.status(401).send({ message: 'Authorization Required' });
+    return noAuthErrorHandler(res);
   }
 
   const token = authorization.replace('Bearer ', '');
@@ -17,10 +18,10 @@ module.exports = (req, res, next) => {
       NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret',
     );
   } catch (err) {
-    return res.status(401).send({ message: 'Authorization Required' });
+    return noAuthErrorHandler(res);
   }
 
   req.user = payload;
 
-  next();
+  return next();
 };

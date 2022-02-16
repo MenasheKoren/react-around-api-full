@@ -12,6 +12,7 @@ function invalidDataPassedErrorHandler(
 }
 
 const userDataErrorHandlerSelector = 'User';
+const emailDataErrorHandlerSelector = 'Email';
 const userProfileDataErrorHandlerSelector = 'User profile';
 const userAvatarDataErrorHandlerSelector = 'User avatar';
 
@@ -26,6 +27,7 @@ const dislikeActionFailSelector = 'disliked';
 module.exports = {
   invalidDataPassedErrorHandler,
   userDataErrorHandlerSelector,
+  emailDataErrorHandlerSelector,
   cardDataErrorHandlerSelector,
   createActionFailSelector,
   updateActionFailSelector,

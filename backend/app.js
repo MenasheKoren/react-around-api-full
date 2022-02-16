@@ -8,6 +8,7 @@ const helmet = require('helmet');
 const users = require('./routes/users');
 
 const cards = require('./routes/cards');
+const { pageNotFoundErrorHandler } = require('./errors/not-found-error');
 
 const { createUser, login } = require('./controllers/users');
 
@@ -16,6 +17,7 @@ const {
   celebrateLogin,
 } = require('./middleware/celebrate');
 
+const { defaultErrorHandler } = require('./errors/default-error');
 const { requestLogger, errorLogger } = require('./middleware/logger');
 
 const app = express();
@@ -45,15 +47,10 @@ app.use('/users', users);
 app.use('/cards/api', cards);
 
 app.use(errorLogger);
+app.use('*', pageNotFoundErrorHandler);
+app.use(defaultErrorHandler);
 
-app.use((req, res) => {
-  res.status(404).send({ message: 'Requested resource not found' });
-});
-
-app.listen(PORT, (err, res) => {
-  if (err) {
-    res.status(500).send({ message: 'An error has occurred on the server' });
-  }
+app.listen(PORT, () => {
   // eslint-disable-next-line no-console
   console.log(`App listening on port ${PORT}`);
 });

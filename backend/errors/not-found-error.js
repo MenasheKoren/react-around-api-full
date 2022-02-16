@@ -7,6 +7,13 @@ function documentNotFoundErrorHandler(queryFailSelector) {
   throw error;
 }
 
+function pageNotFoundErrorHandler() {
+  const error = new Error('Requested page not found');
+  error.statusCode = ERROR_CODE_404;
+  error.name = 'PageNotFound';
+  throw error;
+}
+
 const getUsersErrorHandlerSelector = 'users';
 const getCurrentUserErrorHandlerSelector = 'user';
 const getUserByIdErrorHandlerSelector = 'user with that Id';
@@ -14,14 +21,12 @@ const getUserByIdErrorHandlerSelector = 'user with that Id';
 const getCardsErrorHandlerSelector = 'cards';
 const getCardByIdErrorHandlerSelector = 'card with that Id';
 
-const unknownRouteSelector = 'URL';
-
 module.exports = {
   documentNotFoundErrorHandler,
+  pageNotFoundErrorHandler,
   getUsersErrorHandlerSelector,
   getUserByIdErrorHandlerSelector,
   getCardByIdErrorHandlerSelector,
   getCardsErrorHandlerSelector,
   getCurrentUserErrorHandlerSelector,
-  unknownRouteSelector,
 };

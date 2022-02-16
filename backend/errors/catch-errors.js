@@ -14,7 +14,7 @@ module.exports.catchFindErrorHandler = (err, res) => {
   } else if (err.name === 'CastError') {
     castErrorHandler(res, err);
   } else {
-    defaultErrorHandler(res);
+    defaultErrorHandler(err, '', res);
   }
 };
 
@@ -26,7 +26,7 @@ module.exports.catchFindByIdErrorHandler = (err, res) => {
   } else if (err.name === 'CastError') {
     castErrorHandler(res, err);
   } else {
-    defaultErrorHandler(res);
+    defaultErrorHandler(err, '', res);
   }
 };
 
@@ -41,7 +41,7 @@ module.exports.catchCreateErrorHandler = (err, res, dataFailSelector) => {
   } else if (err.name === 'CastError') {
     castErrorHandler(res, err);
   } else {
-    defaultErrorHandler(res);
+    defaultErrorHandler(err, '', res);
   }
 };
 
@@ -65,6 +65,18 @@ module.exports.catchFindByIdAndUpdateOrDeleteErrorHandler = (
   } else if (err.name === 'CastError') {
     castErrorHandler(res, err);
   } else {
-    defaultErrorHandler(res);
+    defaultErrorHandler(err, '', res);
+  }
+};
+
+module.exports.catchUsedEmail = (err, res, dataFailSelector) => {
+  if (err.name === 'MongoServerError' && err.code === 11000) {
+    res.status(409).send({
+      message: `This ${dataFailSelector} is already used`,
+    });
+  } else if (err.name === 'CastError') {
+    castErrorHandler(res, err);
+  } else {
+    defaultErrorHandler(err, '', res);
   }
 };
