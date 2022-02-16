@@ -21,6 +21,7 @@ const {
   userProfileDataErrorHandlerSelector,
   userAvatarDataErrorHandlerSelector,
 } = require('../errors/invalid-data-passed-error');
+const { noAuthErrorHandler } = require('../errors/no-auth-error');
 
 module.exports.getUsers = (req, res) => {
   User.find()
@@ -146,7 +147,7 @@ module.exports.login = (req, res) => {
 
       res.send({ token });
     })
-    .catch((err) => {
-      res.status(401).send({ message: err.message });
+    .catch(() => {
+      noAuthErrorHandler(res);
     });
 };
